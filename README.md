@@ -1,54 +1,130 @@
-# React + TypeScript + Vite
+# React Component Library Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is an implementation of a technical assignment to create a small design system using React, TypeScript, and react-aria-components. The implementation focuses on creating reusable, accessible UI components following modern best practices.
 
-Currently, two official plugins are available:
+## Assignment Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Implementation of design system components based on provided Figma design
+- Built with React and TypeScript
+- Uses react-aria-components for accessibility
+- CSS Modules for styling
+- Interactive form demonstration
+- Component state management
 
-## Expanding the ESLint configuration
+## Components
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Button Component
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Two sizes: small and medium
+- Two variants: contained and outlined
+- Two color themes: primary and secondary
+- Support for text, text with icon, and icon-only variants
+- States: active (hover, focus) and disabled
+
+### Input Component
+
+- Basic text input functionality
+- States: focused and disabled
+- Built with react-aria-components
+
+### NumberInput Component
+
+- Numeric input with increment/decrement buttons
+- Uses the Button component for +/- controls
+- States: focused and disabled
+- Validation support
+
+### Slider Component
+
+- Interactive range selection
+- Hover state support
+- Synchronized with NumberInput in the demo form
+
+## Getting Started
+
+### Tech Stack
+
+- React with TypeScript
+- react-aria-components for accessibility
+- CSS Modules for styling
+- Vite for build tooling
+- Testing with Vitest and React Testing Library
+
+### Getting Started
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start the development server
+pnpm dev
+
+# Run tests
+pnpm test
+
+# Build for production
+pnpm build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Implementation Details
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Demo Form
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+The project includes a demonstration form that showcases the integration of all components:
+
+- NumberInput and Slider components are synchronized
+- Clear button resets all form values
+- Submit button displays form values
+- All components demonstrate proper state management
+
+### Example Usage
+
+```tsx
+<form onSubmit={handleSubmit}>
+  <NumberInput
+    label="Value"
+    value={numValue}
+    onChange={setNumValue}
+    min={0}
+    max={100}
+  />
+
+  <Slider value={numValue} onChange={setNumValue} min={0} max={100} />
+
+  <Input label="Text Input" value={textValue} onChange={setTextValue} />
+
+  <div className={styles.buttons}>
+    <Button variant="outlined" onClick={handleClear}>
+      Clear
+    </Button>
+    <Button variant="contained" type="submit">
+      Submit
+    </Button>
+  </div>
+</form>
 ```
+
+## Project Structure
+
+```
+src/
+  components/     # Component implementations
+    button/       # Button component with variants
+    input/       # Base input component
+    numberInput/ # Numeric input with controls
+    slider/      # Range slider component
+  App.tsx        # Demo form implementation
+```
+
+## Assignment Completion Checklist
+
+[x] All components implemented using react-aria-components
+[x] CSS Modules & TailwindCSS used for styling
+[x] Button component with all required variants and states
+[x] Input component with proper state handling
+[x] NumberInput component with Button integration
+[x] Slider component with hover states
+[x] Demo form with component integration
+[x] Synchronization between NumberInput and Slider
+[x] Form clear and submit functionality
+[x] All components properly tested
