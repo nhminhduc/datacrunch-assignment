@@ -7,7 +7,7 @@ import { Slider } from "./components/slider/Slider";
 
 function App() {
   const [textValue, setTextValue] = useState("");
-  const [numberValue, setNumberValue] = useState<number | undefined>(50); // Default value for slider/number input
+  const [numberValue, setNumberValue] = useState<number | undefined>(0); // Default value for slider/number input
 
   const handleClear = () => {
     setTextValue("");
@@ -43,103 +43,109 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <h1>Component Form</h1>
-      <form
-        className="form-container"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-      >
-        <Input
-          label="Text Input"
-          value={textValue}
-          onChange={setTextValue}
-          placeholder="Enter some text"
-        />
+    <>
+      <div className="app-container w-96 h-72">
+        <form
+          className="form-container flex flex-col justify-between"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
+          <Input
+            label="Name"
+            value={textValue}
+            onChange={setTextValue}
+            placeholder="enter text"
+          />
 
-        <NumberInput
-          label="Number Input"
-          value={numberValue}
-          onChange={setNumberValue} // react-aria NumberField onChange handles undefined correctly
-          minValue={0}
-          maxValue={100}
-          step={1}
-        />
+          <div className="flex gap-4 justify-between items-end">
+            <NumberInput
+              label="Size (GB)"
+              value={numberValue}
+              onChange={setNumberValue}
+              minValue={0}
+              maxValue={100}
+              step={1}
+            />
 
-        <Slider
-          label="Slider Control"
-          value={sliderValue} // Use the bounded value
-          onChange={handleSliderChange} // Use the corrected handler
-          minValue={0}
-          maxValue={100}
-          step={1}
-        />
-
-        <div className="button-group">
+            <Slider
+              value={sliderValue}
+              onChange={handleSliderChange}
+              minValue={0}
+              maxValue={100}
+              step={1}
+            />
+          </div>
+          <div className="flex justify-between gap-2">
+            <Button
+              type="button"
+              variant="outlined"
+              color="secondary"
+              onClick={handleClear}
+              icon="trashbin"
+            >
+              Clear
+            </Button>
+            <Button type="submit" color="primary">
+              Submit
+            </Button>
+          </div>
+        </form>
+      </div>
+      <div className="app-container">
+        <h2>Button Examples</h2>
+        <div className="button-examples">
+          <Button size="medium" variant="contained" color="primary">
+            Primary Contained
+          </Button>
+          <Button size="medium" variant="outlined" color="primary">
+            Primary Outlined
+          </Button>
+          <Button size="medium" variant="contained" color="secondary">
+            Secondary Contained
+          </Button>
+          <Button size="medium" variant="outlined" color="secondary">
+            Secondary Outlined
+          </Button>
+          <Button size="small" variant="contained" color="primary">
+            Small Primary
+          </Button>
+          <Button size="small" variant="outlined" color="secondary">
+            Small Secondary
+          </Button>
+          <Button size="medium" variant="contained" color="primary" icon="plus">
+            With Icon
+          </Button>
           <Button
-            type="button"
+            size="small"
             variant="outlined"
             color="secondary"
-            onClick={handleClear}
-            icon="trashbin"
+            icon="minus"
           >
-            Clear
+            With Icon
           </Button>
-          <Button type="submit" color="primary">
-            Submit
+          <Button
+            size="medium"
+            variant="contained"
+            color="primary"
+            icon="plus"
+            iconOnly
+          />
+          <Button
+            size="small"
+            variant="outlined"
+            color="secondary"
+            icon="minus"
+            iconOnly
+          />
+          <Button isDisabled>Disabled Contained</Button>
+          <Button variant="outlined" isDisabled>
+            Disabled Outlined
           </Button>
         </div>
-      </form>
-
-      {/* Example Buttons (from original request) */}
-      <h2>Button Examples</h2>
-      <div className="button-examples">
-        <Button size="medium" variant="contained" color="primary">
-          Primary Contained
-        </Button>
-        <Button size="medium" variant="outlined" color="primary">
-          Primary Outlined
-        </Button>
-        <Button size="medium" variant="contained" color="secondary">
-          Secondary Contained
-        </Button>
-        <Button size="medium" variant="outlined" color="secondary">
-          Secondary Outlined
-        </Button>
-        <Button size="small" variant="contained" color="primary">
-          Small Primary
-        </Button>
-        <Button size="small" variant="outlined" color="secondary">
-          Small Secondary
-        </Button>
-        <Button size="medium" variant="contained" color="primary" icon="plus">
-          With Icon
-        </Button>
-        <Button size="small" variant="outlined" color="secondary" icon="minus">
-          With Icon
-        </Button>
-        <Button
-          size="medium"
-          variant="contained"
-          color="primary"
-          icon="plus"
-          iconOnly
-        />
-        <Button
-          size="small"
-          variant="outlined"
-          color="secondary"
-          icon="minus"
-          iconOnly
-        />
-        <Button isDisabled>Disabled Contained</Button>
-        <Button variant="outlined" isDisabled>
-          Disabled Outlined
-        </Button>
       </div>
-    </div>
+    </>
   );
 }
 
