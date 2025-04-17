@@ -1,50 +1,44 @@
-import { useState } from "react";
 import "./App.css";
-import { Button } from "./components/button/button";
+import { useState } from "react";
+import { Button } from "./components/button/Button";
 import { Input } from "./components/input/Input";
 import { NumberInput } from "./components/numberInput/NumberInput";
 import { Slider } from "./components/slider/Slider";
 
 function App() {
   const [textValue, setTextValue] = useState("");
-  const [numberValue, setNumberValue] = useState<number | undefined>(0); // Default value for slider/number input
+  const [size, setSize] = useState<number | undefined>(0);
 
   const handleClear = () => {
     setTextValue("");
-    setNumberValue(undefined); // Or set to a default like 0 or 50 if preferred
+    setSize(0);
   };
 
   const handleSubmit = () => {
     const formData = {
       text: textValue,
-      number: numberValue,
+      size: size,
     };
     console.log("Form Submitted:", formData);
     alert(
-      `Form Submitted:\nText: ${formData.text}\nNumber: ${
-        formData.number ?? "N/A"
-      }`
-    ); // Handle undefined case in alert
+      `Form Submitted:\nText: ${formData.text}\nSize: ${
+        formData.size ?? "N/A"
+      } GB`
+    );
   };
 
-  // Ensure numberValue is within slider bounds (assuming 0-100)
-  // Provide a default value (e.g., 50) if numberValue is undefined for the slider
   const sliderValue =
-    numberValue === undefined ? 50 : Math.max(0, Math.min(100, numberValue));
+    size === undefined ? 50 : Math.max(0, Math.min(100, size));
 
-  // Handler for Slider onChange, ensuring we pass a number to setNumberValue
   const handleSliderChange = (value: number | number[]) => {
-    // Assuming a single thumb slider, value should be number
     if (typeof value === "number") {
-      setNumberValue(value);
+      setSize(value);
     }
-    // If it could be a range slider, handle the array case appropriately
-    // else if (Array.isArray(value)) { /* handle range */ }
   };
 
   return (
     <>
-      <div className="app-container w-96 h-72">
+      <div className="app-container w-[367px] h-[280px]">
         <form
           className="form-container flex flex-col justify-between"
           onSubmit={(e) => {
@@ -62,8 +56,8 @@ function App() {
           <div className="flex gap-4 justify-between items-end">
             <NumberInput
               label="Size (GB)"
-              value={numberValue}
-              onChange={setNumberValue}
+              value={size}
+              onChange={setSize}
               minValue={0}
               maxValue={100}
               step={1}
@@ -81,7 +75,7 @@ function App() {
             <Button
               type="button"
               variant="outlined"
-              color="secondary"
+              color="primary"
               onClick={handleClear}
               icon="trashbin"
             >
@@ -95,7 +89,7 @@ function App() {
       </div>
       <div className="app-container">
         <h2>Button Examples</h2>
-        <div className="button-examples">
+        <div className="flex flex-col flex-wrap items-start gap-2">
           <Button size="medium" variant="contained" color="primary">
             Primary Contained
           </Button>
@@ -115,7 +109,7 @@ function App() {
             Small Secondary
           </Button>
           <Button size="medium" variant="contained" color="primary" icon="plus">
-            With Icon
+            Icon left
           </Button>
           <Button
             size="small"
@@ -123,7 +117,25 @@ function App() {
             color="secondary"
             icon="minus"
           >
-            With Icon
+            Icon left
+          </Button>
+          <Button
+            size="medium"
+            variant="contained"
+            color="primary"
+            icon="plus"
+            iconPosition="right"
+          >
+            Icon right
+          </Button>
+          <Button
+            size="small"
+            variant="outlined"
+            color="secondary"
+            icon="minus"
+            iconPosition="right"
+          >
+            Icon right
           </Button>
           <Button
             size="medium"

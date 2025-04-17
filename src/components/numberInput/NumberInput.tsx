@@ -5,7 +5,7 @@ import {
   Group,
   Input,
 } from "react-aria-components";
-import { Button } from "../button/button";
+import { Button } from "../button/Button";
 import clsx from "clsx";
 
 export interface NumberInputProps extends AriaNumberFieldProps {
@@ -17,6 +17,7 @@ export const NumberInput = ({ label, ...props }: NumberInputProps) => {
     <AriaNumberField
       {...props}
       className={clsx("flex flex-col gap-1", props.isDisabled && "opacity-70")}
+      isDisabled={props.isDisabled}
     >
       {label && (
         <Label
@@ -30,7 +31,7 @@ export const NumberInput = ({ label, ...props }: NumberInputProps) => {
       )}
       <Group
         className={clsx(
-          "w-[104px] h-[24px] flex items-center border border-gray-400 rounded-sm",
+          "w-[104px] h-[24px] flex items-center border border-gray-300 rounded-sm",
           "transition-[border-color,box-shadow]",
           "data-[focus-within]:border-gray-500",
           props.isDisabled &&
@@ -44,8 +45,10 @@ export const NumberInput = ({ label, ...props }: NumberInputProps) => {
           size="input"
           icon="minus"
           iconOnly
+          isDisabled={props.isDisabled}
         />
         <Input
+          data-testid="number-input"
           className={clsx(
             "px-3 py-2 flex-grow text-sm text-center min-w-[40px]",
             "border-none outline-none bg-transparent",
@@ -59,6 +62,7 @@ export const NumberInput = ({ label, ...props }: NumberInputProps) => {
           size="input"
           icon="plus"
           iconOnly
+          isDisabled={props.isDisabled}
         />
       </Group>
     </AriaNumberField>

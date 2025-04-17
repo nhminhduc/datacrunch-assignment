@@ -1,0 +1,7 @@
+@reference "../../index.css";
+
+.button-base {
+  @apply flex items-center justify-center gap-2 
+         border cursor-pointer font-medium 
+         transition-colors outline-none;
+}

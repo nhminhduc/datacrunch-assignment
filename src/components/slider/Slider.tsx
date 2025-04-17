@@ -15,7 +15,7 @@ export const Slider = ({ label, ...props }: SliderProps) => {
   return (
     <AriaSlider
       {...props}
-      className="flex flex-col items-stretch w-[200px] data-[disabled]:opacity-50"
+      className="flex flex-col items-stretch w-[200px] data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed"
     >
       {label && (
         <div className="flex mb-1">
@@ -25,7 +25,7 @@ export const Slider = ({ label, ...props }: SliderProps) => {
           <SliderOutput className="text-sm text-gray-600 data-[disabled]:text-gray-500" />
         </div>
       )}
-      <SliderTrack className="relative w-full h-7">
+      <SliderTrack className="relative w-full h-7 group ">
         {({ state }) => (
           <>
             <div className="absolute h-1 top-[50%] -translate-y-1/2 w-full rounded-full bg-gray-200 data-[disabled]:bg-gray-100" />
@@ -35,7 +35,7 @@ export const Slider = ({ label, ...props }: SliderProps) => {
                 width: state.getThumbPercent(0) * 100 + "%",
               }}
             />
-            <SliderThumb className="w-4 h-4 top-[50%] bg-primary rounded-full border-1 border-white shadow-sm cursor-grab absolute outline-none data-[dragging]:bg-primary data-[dragging]:cursor-grabbing focus-visible:ring-2 ring-primary ring-offset-1 data-[disabled]:bg-gray-400 data-[disabled]:cursor-not-allowed" />
+            <SliderThumb className="w-4 h-4 top-[50%] bg-primary rounded-full border-1 border-white shadow-sm cursor-grab absolute outline-none transition data-[dragging]:bg-primary data-[dragging]:cursor-grabbing focus-visible:ring-2 ring-primary ring-offset-1 data-[disabled]:bg-gray-400 data-[disabled]:cursor-not-allowed group-hover:ring-primary/15 group-hover:ring-8 data-focus-visible:ring-primary/15 data-focus-visible:ring-8" />
           </>
         )}
       </SliderTrack>
