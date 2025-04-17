@@ -8,6 +8,8 @@ import { Slider } from "./components/slider/Slider";
 function App() {
   const [textValue, setTextValue] = useState("");
   const [size, setSize] = useState<number | undefined>(0);
+  const [exampleText, setExampleText] = useState("Initial Value");
+  const [exampleNumber, setExampleNumber] = useState<number | undefined>(25);
 
   const handleClear = () => {
     setTextValue("");
@@ -87,74 +89,159 @@ function App() {
           </div>
         </form>
       </div>
-      <div className="app-container">
-        <h2>Button Examples</h2>
-        <div className="flex flex-col flex-wrap items-start gap-2">
-          <Button size="medium" variant="contained" color="primary">
-            Primary Contained
-          </Button>
-          <Button size="medium" variant="outlined" color="primary">
-            Primary Outlined
-          </Button>
-          <Button size="medium" variant="contained" color="secondary">
-            Secondary Contained
-          </Button>
-          <Button size="medium" variant="outlined" color="secondary">
-            Secondary Outlined
-          </Button>
-          <Button size="small" variant="contained" color="primary">
-            Small Primary
-          </Button>
-          <Button size="small" variant="outlined" color="secondary">
-            Small Secondary
-          </Button>
-          <Button size="medium" variant="contained" color="primary" icon="plus">
-            Icon left
-          </Button>
-          <Button
-            size="small"
-            variant="outlined"
-            color="secondary"
-            icon="minus"
-          >
-            Icon left
-          </Button>
-          <Button
-            size="medium"
-            variant="contained"
-            color="primary"
-            icon="plus"
-            iconPosition="right"
-          >
-            Icon right
-          </Button>
-          <Button
-            size="small"
-            variant="outlined"
-            color="secondary"
-            icon="minus"
-            iconPosition="right"
-          >
-            Icon right
-          </Button>
-          <Button
-            size="medium"
-            variant="contained"
-            color="primary"
-            icon="plus"
-            iconOnly
-          />
-          <Button
-            size="small"
-            variant="outlined"
-            color="secondary"
-            icon="minus"
-            iconOnly
-          />
-          <Button isDisabled>Disabled Contained</Button>
-          <Button variant="outlined" isDisabled>
-            Disabled Outlined
-          </Button>
+      <div className="app-container mt-4 p-4 border rounded">
+        <h2>Component Examples</h2>
+
+        {/* Input Examples */}
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold mb-2">Input</h3>
+          <div className="flex flex-col items-start gap-4">
+            <Input
+              label="Basic Input"
+              value={exampleText}
+              onChange={setExampleText}
+              placeholder="Enter text here"
+            />
+            <Input
+              label="Disabled Input"
+              value="Cannot change"
+              onChange={() => {}}
+              placeholder="Disabled"
+              isDisabled
+            />
+          </div>
+        </div>
+
+        {/* NumberInput Examples */}
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold mb-2">Number Input</h3>
+          <div className="flex flex-col items-start gap-4">
+            <NumberInput
+              label="Basic Number Input (0-50, step 5)"
+              value={exampleNumber}
+              onChange={setExampleNumber}
+              minValue={0}
+              maxValue={50}
+              step={5}
+            />
+            <NumberInput
+              label="Disabled Number Input"
+              value={10}
+              onChange={() => {}}
+              minValue={0}
+              maxValue={100}
+              isDisabled
+            />
+          </div>
+        </div>
+
+        {/* Button Examples */}
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold mb-2">
+            Button - Variants & Colors (Medium)
+          </h3>
+          <div className="flex flex-wrap items-start gap-2">
+            <Button size="medium" variant="contained" color="primary">
+              Primary Contained
+            </Button>
+            <Button size="medium" variant="outlined" color="primary">
+              Primary Outlined
+            </Button>
+            <Button size="medium" variant="contained" color="secondary">
+              Secondary Contained
+            </Button>
+            <Button size="medium" variant="outlined" color="secondary">
+              Secondary Outlined
+            </Button>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold mb-2">Small Size</h3>
+          <div className="flex flex-wrap items-start gap-2">
+            <Button size="small" variant="contained" color="primary">
+              Small Primary
+            </Button>
+            <Button size="small" variant="outlined" color="secondary">
+              Small Secondary
+            </Button>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold mb-2">With Icon (Left)</h3>
+          <div className="flex flex-wrap items-start gap-2">
+            <Button
+              size="medium"
+              variant="contained"
+              color="primary"
+              icon="plus"
+            >
+              Medium Primary
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              color="secondary"
+              icon="minus"
+            >
+              Small Secondary
+            </Button>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold mb-2">With Icon (Right)</h3>
+          <div className="flex flex-wrap items-start gap-2">
+            <Button
+              size="medium"
+              variant="contained"
+              color="primary"
+              icon="plus"
+              iconPosition="right"
+            >
+              Medium Primary
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              color="secondary"
+              icon="minus"
+              iconPosition="right"
+            >
+              Small Secondary
+            </Button>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold mb-2">Icon Only</h3>
+          <div className="flex flex-wrap items-start gap-2">
+            <Button
+              size="medium"
+              variant="contained"
+              color="primary"
+              icon="plus"
+              iconOnly
+            />
+            <Button
+              size="small"
+              variant="outlined"
+              color="secondary"
+              icon="minus"
+              iconOnly
+            />
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold mb-2">Disabled</h3>
+          <div className="flex flex-wrap items-start gap-2">
+            <Button isDisabled>Disabled Contained</Button>
+            <Button variant="outlined" isDisabled>
+              Disabled Outlined
+            </Button>
+          </div>
         </div>
       </div>
     </>
